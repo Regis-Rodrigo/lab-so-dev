@@ -5,38 +5,33 @@
 # FASE 1 — Pré-processador (gcc -E)
 # Quantas linhas tem soma.i? O que o pré-processador expandiu?
 
-Linhas em soma.i:
-Observação:
-
+Linhas em soma.i: 757 soma.i Observação: O pré-processador expandiu principalmente o conteúdo da biblioteca, com definições, marcos, tipos e declarações usadas pela biblioteca stdio.h
 
 # FASE 2 — Assembly (gcc -S)
 # Cole aqui 5 a 10 linhas de soma.s que você considera mais
 # interessantes e explique o que cada uma faz.
 
-Trecho de soma.s:
-
-Explicação:
-
+Trecho de soma.s: addi sp,sp,-32 addw a5,a4,a5 jr ra li a1,5 li a0,7 call soma call printf
 
 # FASE 3 — Código objeto (gcc -c)
 # Cole a saída de: file soma.o
 
-file soma.o:
+file soma.o: ELF 64-bit LSB relocatable, UCB RISC-V, version 1 (SYSV), not stripped
 
 # Cole a saída de: nm soma.o
 
-nm soma.o:
+nm soma.o:  0000000000000000 r .LC0 0000000000000028 T main U printf 0000000000000000 T soma
 
 # Quais símbolos aparecem? O que significa o marcador "U" ao lado
 # de printf?
 
-Observação sobre nm:
+Observação sobre nm:  O nm mostra que o arquivo está incompleto, pois as funções que eu criei estão lá (T), mas a função do sistema (printf) ainda está "vazia" (U).
 
 
 # FASE 4 — Ligação (gcc soma.o -o soma)
 # O que mudou após a ligação? Execute ./soma e registre a saída.
 
-Saída de ./soma:
+Saída de ./soma: 12
 
 
 # QUESTÕES DE SÍNTESE
@@ -45,10 +40,10 @@ Saída de ./soma:
 #    apresentação esse mesmo problema apareceu? O que o ligador
 #    faz com esse símbolo?
 
-Resposta 1:
+Resposta 1:  O ligador atua como um "integrador" final. Como o código do printf não está no meu arquivo (ele pertence à biblioteca padrão do sistema), o compilador apenas sinaliza que ele é necessário. O papel do ligador é encontrar onde essa função está guardada no sistema e conectar os pontos, preenchendo o endereço correto para que o programa saiba o que executar quando o printf for chamado.
 
 
 # 2. Compare soma.i com soma.s: qual das duas saídas é análoga
 #    ao "código objeto" do montador histórico? Justifique.
 
-Resposta 2:
+Resposta 2:  Na realidade, o computador não executa nenhum desses três arquivos diretamente. O .i ainda é texto, o .s é uma representação para humanos e o .o é código de máquina, mas está "solto" e incompleto. O processador só consegue rodar o executável final (o arquivo "soma"), que foi gerado pelo ligador com todas as dependências resolvidas e organizado para o sistema operacional.
