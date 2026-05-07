@@ -8,15 +8,16 @@
 # strace echo "ola" 2>&1 | grep write
 
 Saída filtrada:
+write(1, "ola\n", 4) = 4
 
 # Anote:
 #   Argumento 1 (file descriptor):
 #   O que está sendo escrito:
 #   Valor de retorno:
 
-fd:
-conteúdo:
-retorno:
+fd: 1 (saída padrão / terminal)
+conteúdo: "ola\n"
+retorno: 4
 
 
 # PARTE B — Programa C com write() direto
@@ -25,10 +26,19 @@ retorno:
 
 [código-fonte]
 
+#include <unistd.h>
+
+int main() {
+    write(1, "Ola via write()\n", 16);
+    return 0;
+}
+
 
 # Cole aqui a linha write(...) da saída de strace ./syscall_direto:
 
 [saída do strace]
+
+write(1, "Ola via write()\n", 16) = 16
 
 
 # PARTE C — Questões de síntese
@@ -38,6 +48,7 @@ retorno:
 #    instruções privilegiadas diretamente? (mínimo 2 frases)
 
 Resposta 1:
+Um programa de usuário faz I/O usando chamadas de sistema, como write(), que solicitam serviços ao kernel. O kernel executa as instruções privilegiadas em modo kernel e controla o acesso seguro aos dispositivos de hardware.
 
 
 # 2. Compare write(fd, buffer, tamanho) com o "programa de canal"
@@ -45,3 +56,4 @@ Resposta 1:
 #    responsabilidades?
 
 Resposta 2:
+Os dois descrevem ao sistema o que deve ser transferido, para onde e qual o tamanho dos dados. Tanto o write() quanto o programa de canal delegam ao sistema operacional ou controlador a execução da operação de entrada e saída.
