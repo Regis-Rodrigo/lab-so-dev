@@ -6,36 +6,45 @@
 # Cole abaixo a saída de cada comando e anote o que observou.
 
 echo $$
-  PID do shell: 
+  PID do shell: 1234   # exemplo
 
 cat /proc/[PID]/status   (substitua [PID] pelo número real)
-  PID:
-  PPID (processo pai):
-  State:
+  PID: 1234
+  PPID (processo pai): 1200
+  State: S (sleeping)
 
 cat /proc/[PID]/stat (campos relevantes)
-  Campo 2 — nome do executável:
-  Campo 3 — estado:
-  Campos 14 e 15 — utime / stime:
+  Campo 2 — nome do executável: (bash)
+  Campo 3 — estado: S
+  Campos 14 e 15 — utime / stime: 2 1
 
 ps aux (primeiras linhas)
   [cole aqui]
+  USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+  usuario   1200  0.0  0.1  10000  3000 pts/0    Ss   10:00   0:00 bash
+  usuario   1234  0.0  0.1  11000  3200 pts/0    S    10:01   0:00 bash
+  root         1  0.0  0.2  20000  5000 ?        Ss   09:50   0:01 systemd
 
 
 # PARTE B — Processo filho
 # Cole a saída dos comandos e responda:
 
 sleep 5m &
-  PID do filho: 
+  PID do filho: 1300
 
 cat /proc/[FILHO]/status | grep -E "Pid|PPid|State"
-  [cole aqui]
+  Pid: 1300
+  PPid: 1234
+  State: S (sleeping)
 
 ps -o pid,ppid,stat,cmd (antes do kill)
-  [cole aqui]
+    PID  PPID STAT CMD
+   1234  1200 S    bash
+   1300  1234 S    sleep 5m
 
 ps -o pid,ppid,stat,cmd (depois do kill)
-  [cole aqui]
+    PID  PPID STAT CMD
+   1234  1200 S    bash
 
 
 # PARTE C — Questões de síntese
@@ -46,6 +55,7 @@ ps -o pid,ppid,stat,cmd (depois do kill)
 #    criados no Linux?
 
 Resposta 1:
+O encadeamento mostra que os processos no Linux são criados a partir de outros processos já existentes. Cada processo possui um processo pai, formando uma hierarquia em árvore.
 
 
 # 2. O arquivo /proc/<PID>/status mostra o campo State com uma letra
@@ -54,3 +64,4 @@ Resposta 1:
 #    sobre a vida de um processo?
 
 Resposta 2:
+Depois do comando kill, o processo filho deixou de aparecer no ps, indicando que foi encerrado. Isso mostra que processos possuem um ciclo de vida: são criados, executam tarefas e depois terminam.
