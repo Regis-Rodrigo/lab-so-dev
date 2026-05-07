@@ -7,25 +7,39 @@
 # explicando a função do diretório com suas próprias palavras.
 
 /proc
-  
+Comando: ls /proc
+Explicação: Diretório virtual que mostra informações do sistema e dos processos em execução.
+
 
 /proc/cpuinfo
-  
+Comando: cat /proc/cpuinfo
+Explicação: Arquivo virtual com informações do processador, como modelo, núcleos e frequência.
+
 
 /proc/meminfo
-  
+Comando: cat /proc/meminfo
+Explicação: Mostra dados sobre o uso da memória RAM e swap do sistema.
+
 
 /proc/uptime
-  
+Comando: cat /proc/uptime
+Explicação: Exibe há quanto tempo o sistema está ligado e quanto tempo ficou ocioso.
+
 
 /bin
+Comando: ls /bin
+Explicação: Contém programas e comandos básicos do sistema, usados por todos os usuários.
 
-  
+
 /dev
-  
+Comando: ls /dev
+Explicação: Diretório que representa dispositivos do sistema, como discos, teclado e terminal.
+
 
 /etc
-  
+Comando: ls /etc
+Explicação: Guarda arquivos de configuração do sistema e de serviços instalados.
+
 
 
 # PARTE B — Questão de reflexão
@@ -33,4 +47,4 @@
 # e que rotinas de dispositivo traduziam comandos.
 # Em qual diretório do Linux você reconhece essa função?
 
-Resposta:
+Resposta: No diretório /dev, porque ele representa os dispositivos de entrada e saída do sistema e permite que o sistema operacional controle a comunicação com o hardware.
