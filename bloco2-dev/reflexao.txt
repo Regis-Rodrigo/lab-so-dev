@@ -9,7 +9,7 @@
 # No shell moderno, qual mecanismo cumpre papel equivalente?
 # Dê um exemplo concreto do que você usou nesta atividade.
 
-Resposta:
+Resposta:  Os mecanismos equivalentes são os redirecionadores (como > e <) e os pipes (|). Antigamente era preciso mapear manualmente onde conectar uma fita ou disco; hoje, o Shell faz esse "meio de campo" permitindo que a gente jogue a saída de um programa para um arquivo ou conecte a saída de um processo diretamente na entrada de outro de forma fluida.
 
 
 # ─────────────────────────────────────────────────────
@@ -21,11 +21,13 @@ Resposta:
 #    papel? Como o make sabe que não precisa recompilar um arquivo
 #    que não mudou?
 
-Resposta 1:
+Resposta 1: O Make utiliza um sistema de dependências baseado no tempo (timestamps). Ele compara a data e hora da última modificação do arquivo fonte com a do arquivo gerado anteriormente. Se o código fonte for mais antigo que o binário, o Make entende que não houve alterações e pula aquela etapa, economizando processamento ao não refazer o que já está pronto.
 
 
 # 2. O monitor unificava "supervisor, carregador e rotinas de I/O
 #    sob uma interface textual". O que o Makefile unifica no fluxo
 #    de desenvolvimento moderno?
 
-Resposta 2:
+Resposta 2: O Makefile funciona como uma "receita de automação". Ele unifica todas as regras, comandos de compilação, organização de pastas e limpeza de arquivos em um único lugar. Em vez de o desenvolvedor ter que digitar vários comandos complexos em sequência, o Makefile centraliza tudo sob uma interface simples, garantindo que o programa seja construído sempre da mesma maneira.
+
+
